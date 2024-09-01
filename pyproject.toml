@@ -8,6 +8,9 @@ packages = [{include = "valdac", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+beartype = "^0.18.5"
+dataclasses-json = "^0.6.7"
+pydantic = "^2.8.2"
 
 
 [build-system]
