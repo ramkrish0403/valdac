@@ -1,18 +1,23 @@
-[tool.poetry]
+[project]
 name = "valdac"
-version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+version = "0.2.0"
+description = "validation for data classes"
 readme = "README.md"
+package-mode = true
 packages = [{include = "valdac", from = "src"}]
+requires-python = "<3.12.0a1,>=3.11"
+authors = [
+    {name = "Rama Krishna", email = ""},
+]
+include = ["src/valdac/py.typed"]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-beartype = "^0.18.5"
-dataclasses-json = "^0.6.7"
-pydantic = "^2.8.2"
 
+dependencies = [
+    "beartype>=0.21.0",
+    "dataclasses-json>=0.6.7",
+    "pydantic>=2.11.7",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
