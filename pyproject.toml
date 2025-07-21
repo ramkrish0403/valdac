@@ -1,6 +1,6 @@
 [project]
 name = "valdac"
-version = "0.2.0"
+version = "0.2.1"
 description = "validation for data classes"
 readme = "README.md"
 package-mode = true

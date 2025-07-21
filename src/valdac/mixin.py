@@ -1,8 +1,10 @@
 from dataclasses_json import DataClassJsonMixin
 from beartype.door import is_bearable
 from dataclasses import fields
-from typing import get_type_hints, Any, Dict
+from typing import TypeVar, get_type_hints, Any, Dict
 from pydantic import TypeAdapter
+
+T = TypeVar("T", bound="DataClassMixin")
 
 
 class DataClassMixin(DataClassJsonMixin):
@@ -30,8 +32,7 @@ class DataClassMixin(DataClassJsonMixin):
                 expected_type = type_hints[field_name]
                 if not is_bearable(field_value, expected_type):
                     raise ValueError(
-                        f"Field '{field_name}' with value '{
-                            field_value}' does not match the expected type '{expected_type}'"
+                        f"Field '{field_name}' with value '{field_value}' does not match the expected type '{expected_type}'"
                     )
 
         return True
@@ -50,3 +51,15 @@ class DataClassMixin(DataClassJsonMixin):
         """
         type_adapter = TypeAdapter(cls)
         return type_adapter.json_schema()
+
+    def copy(self: T) -> T:
+        """
+        Create a copy of the dataclass instance.
+
+        This method returns a new instance of the dataclass with the same
+        field values as the current instance.
+
+        Returns:
+            T: A new instance of the dataclass with copied values.
+        """
+        return self.__class__.from_dict(self.to_dict())
